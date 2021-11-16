@@ -129,7 +129,7 @@ svg.append("g")
 
 
 
-		.on("mouseover"), function(event, d){
+		.on("mouseover", function(event, d){
 			d3.select("tooltip")
 			.style("left", event.pageX + "px")
 			.style("top", event.pageY + "px")
