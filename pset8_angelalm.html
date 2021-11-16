@@ -92,19 +92,31 @@ const svg = d3.select("#bar-chart")
 	d3.csv("https://angelalm97.github.io/pset8/boston_311.csv")
 					.then(function(data) {
 						console.log(data);
-
 	var cities = data;
 
+//MASTER xAxis
 	const newArray = dataArray.map(d => d.columnName);
 	const xValues = data.map (d => d.total_count);
-
 
 // x linear scale
 	const x = d3.scaleLinear()
 	    .domain([0, d3.max(xValues)])
 	    .range([0, width]);
+//define x-axis
+	const xAxis = d3.axisLeft(x)
+								.ticks(6)
+								.tickPadding(10);
+
+
+
+//MASTER YAXIS
+	const newnewArray = dataArray.map(d => d.columnName);
+	const yValues = data.map (d => d.Name);
+
 
 	});
+
+//y linear scale
 
 
 </script>
