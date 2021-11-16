@@ -20,7 +20,7 @@ body{
 	}
 
 	g.tick text {
-		font-size: 12 px;
+		font-size: 14 px;
 		fill: purple;
 	}
 
@@ -67,9 +67,6 @@ body{
 
 	<div id = "main">
 		<div id = "tooltip" class="hidden">
-			<p>
-				<span id="value">100</span>
-			</p>
 		</div>
 	</div>
 
@@ -107,11 +104,46 @@ const svg = d3.select("#bar-chart")
 								.ticks(6)
 								.tickPadding(10);
 
-
-
 //MASTER YAXIS
 	const newnewArray = dataArray.map(d => d.columnName);
 	const yValues = data.map (d => d.Name);
+//defining yScale
+	const y = d3.scaleBand()
+		.domain(yValues)
+		.range([height, 0])
+		.paddingInner(0.15);
+
+//rectanglebars
+// add rectangle bars
+svg.append("g")
+		.attr("class", "rect-bars")
+.selectAll("rect")
+		.data(cities)
+		.enter()
+		.append("rect")
+				.attr("y", (d, i) => i * (barHeight + gap) + marginTop)
+				.attr("x", 0 + marginLeft)
+				.attr("width", d => d[8])
+				.attr("height", 30)
+				.attr("fill", "teal")
+
+
+
+		.on("mouseover"), function(event, d){
+			d3.select("tooltip")
+			.style("left", event.pageX + "px")
+			.style("top", event.pageY + "px")
+			.select("#value")
+			.html("<p>" + String(d.label) + </p>)
+
+			d3.select("#tooltip")
+				.classed("hidden", false);
+			})
+
+			.on("mouseout", function(){
+				d3.select("tooltip")
+						.classed("hidden", true);
+			});
 
 
 	});
