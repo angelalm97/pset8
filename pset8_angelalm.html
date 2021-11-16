@@ -1,0 +1,114 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>PSET7 D3 Visualization Webpage</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+
+	h1 {
+		font-family: "Open Sans" , sans-serif;
+		font-size: 24px;
+		color: grey;
+	}
+
+
+	g.tick line {
+		stroke: blue;
+	}
+
+	g.tick text {
+		font-size: 12 px;
+		fill: purple;
+	}
+
+}
+
+}
+ 	#tooltip.hidden {
+ 			display: none;
+		}
+
+ 	#tooltip {
+ 		position: absolute;
+ 		width: 100px;
+ 		height: 65px;
+ 		padding: 5px;
+ 		background-color: white;
+ 		border: solid gray 1px;
+ 		Z-index:1;
+		}
+
+}
+
+</style>
+
+
+</head>
+
+<body>
+	<main role="main" class="container" >
+
+	<div class="row">
+			<div class="col-12">
+				<h1> Boston 311 Requests </h1>
+			</div>
+	</div>
+
+	<div class="row">
+			<div class="col-6">
+				<div id ="bar-chart">
+			</div>
+			</div>
+	</div>
+
+
+	<div id = "main">
+		<div id = "tooltip" class="hidden">
+			<p>
+				<span id="value">100</span>
+			</p>
+		</div>
+	</div>
+
+	</main>
+
+
+<script>
+
+
+// define svg
+const width = 800;
+const height = 600;
+const marginLeft = 300;
+
+const svg = d3.select("#bar-chart")
+					.append("svg")
+					.attr("viewBox", [0, 0, width, height]);
+
+//reading data
+	d3.csv("https://angelalm97.github.io/pset8/boston_311.csv")
+					.then(function(data) {
+						console.log(data);
+
+	var cities = data;
+
+	const newArray = dataArray.map(d => d.columnName);
+	const xValues = data.map (d => d.total_count);
+
+
+// x linear scale
+	const x = d3.scaleLinear()
+	    .domain([0, d3.max(xValues)])
+	    .range([0, width]);
+
+	});
+
+
+</script>
+
+
+</body>
+</html>
