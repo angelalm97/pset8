@@ -1,0 +1,31 @@
+
+
+h1 {
+  font-family: "Open Sans" , sans-serif;
+  font-size: 24px;
+  color: grey;
+}
+
+
+g.tick line {
+  stroke: blue;
+}
+
+g.tick text {
+  font-size: 14 px;
+  fill: purple;
+}
+
+#tooltip.hidden {
+    display: none;
+  }
+
+#tooltip {
+  position: absolute;
+  width: 100px;
+  height: 65px;
+  padding: 5px;
+  background-color: white;
+  border: solid gray 1px;
+  Z-index:1;
+  }

@@ -4,46 +4,10 @@
 		<meta charset="utf-8">
 		<title>PSET7 D3 Visualization Webpage</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.1.1/d3.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="stylepset8.css">
 
 <style>
-body{
-
-	h1 {
-		font-family: "Open Sans" , sans-serif;
-		font-size: 24px;
-		color: grey;
-	}
-
-
-	g.tick line {
-		stroke: blue;
-	}
-
-	g.tick text {
-		font-size: 14 px;
-		fill: purple;
-	}
-
-}
-
-}
- 	#tooltip.hidden {
- 			display: none;
-		}
-
- 	#tooltip {
- 		position: absolute;
- 		width: 100px;
- 		height: 65px;
- 		padding: 5px;
- 		background-color: white;
- 		border: solid gray 1px;
- 		Z-index:1;
-		}
-
-}
-
 </style>
 
 
@@ -84,6 +48,7 @@ const marginLeft = 300;
 const marginTop = 80;
 const barHeight = 30;
 const gap = 5;
+const widthMultiplier = 0.01;
 
 const svg = d3.select("#bar-chart")
 					.append("svg")
@@ -93,62 +58,55 @@ const svg = d3.select("#bar-chart")
 	d3.csv("https://angelalm97.github.io/pset8/boston_311.csv")
 					.then(function(data) {
 						console.log(data);
-	var cities = data;
 
 //MASTER xAxis
-	const newArray = cities.map(d => d.columnName);
+	const newArray = data.map(d => d.columnName);
 	const xValues = data.map (d => d.total_count);
-
 // x linear scale
 	const x = d3.scaleLinear()
 	    .domain([0, d3.max(xValues)])
 	    .range([0, width]);
 //define x-axis
-	const xAxis = d3.axisLeft(x)
-								.ticks(6)
+	const xAxis = d3.axisTop(x)
+								.ticks(10)
 								.tickPadding(10);
 
 //MASTER YAXIS
-	const newnewArray = cities.map(d => d.columnName);
+	const newnewArray = data.map(d => d.columnName);
 	const yValues = data.map (d => d.Name);
 //defining yScale
 	const y = d3.scaleBand()
 		.domain(yValues)
 		.range([height, 0])
 		.paddingInner(0.15);
+//define y-axis
+const yAxis = d3.axisLeft(y)
+								.ticks(10);
+
 
 //rectanglebars
 // add rectangle bars
 svg.append("g")
 		.attr("class", "rect-bars")
 .selectAll("rect")
-		.data(cities)
+		.data(data)
 		.enter()
 		.append("rect")
-				.attr("y", (d, i) => i * (barHeight + gap) + marginTop)
-				.attr("x", 0 + marginLeft)
+				.attr("y", 0)
+				.attr("x", data.map(d=>d.total_count) * widthMultiplier)
 				.attr("width", d => d[8])
 				.attr("height", 30)
-				.attr("fill", "teal")
+				.attr("fill", "teal");
 
+svg.append("g")
+		.attr("class", "x-axis hidden")
+		.attr("transform", "translate(0, 300)")
+		.call(xAxis);
 
-
-		.on("mouseover", function(event, d){
-			d3.select("tooltip")
-			.style("left", event.pageX + "px")
-			.style("top", event.pageY + "px")
-			.select("#value")
-			.html("<p>" + String(d.label) + "</p>")
-
-			d3.select("#tooltip")
-				.classed("hidden", false);
-			})
-
-			.on("mouseout", function() {
-				d3.select("tooltip")
-						.classed("hidden", true);
-			});
-
+svg.append("g")
+		.attr("class", "y-axis hidden")
+		.attr("transform", "translate(300,0)")
+		.call(yAxis);
 
 	});
 
