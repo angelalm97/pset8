@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -58,7 +59,7 @@ body{
 	</div>
 
 	<div class="row">
-			<div class="col-6">
+			<div class="col-12">
 				<div id ="bar-chart">
 			</div>
 			</div>
@@ -80,6 +81,9 @@ body{
 const width = 800;
 const height = 600;
 const marginLeft = 300;
+const marginTop = 80;
+const barHeight = 30;
+const gap = 5;
 
 const svg = d3.select("#bar-chart")
 					.append("svg")
@@ -92,7 +96,7 @@ const svg = d3.select("#bar-chart")
 	var cities = data;
 
 //MASTER xAxis
-	const newArray = dataArray.map(d => d.columnName);
+	const newArray = cities.map(d => d.columnName);
 	const xValues = data.map (d => d.total_count);
 
 // x linear scale
@@ -105,7 +109,7 @@ const svg = d3.select("#bar-chart")
 								.tickPadding(10);
 
 //MASTER YAXIS
-	const newnewArray = dataArray.map(d => d.columnName);
+	const newnewArray = cities.map(d => d.columnName);
 	const yValues = data.map (d => d.Name);
 //defining yScale
 	const y = d3.scaleBand()
