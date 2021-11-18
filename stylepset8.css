@@ -3,17 +3,18 @@
 h1 {
   font-family: "Open Sans" , sans-serif;
   font-size: 24px;
-  color: grey;
+  color: black;
 }
 
 
 g.tick line {
-  stroke: blue;
+  stroke: black;
 }
 
 g.tick text {
-  font-size: 14 px;
-  fill: purple;
+  font-size: 12 px;
+  font-family: sans-serif;
+  fill: black;
 }
 
 #tooltip.hidden {
